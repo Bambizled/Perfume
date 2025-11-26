@@ -1,0 +1,837 @@
+﻿* {
+    margin: 0;/*xoa tat ca k/c ben ngoai pt*/
+    padding: 0;/*xoak/c ben trong*/
+    box-sizing: border-box;
+}
+
+:root { /*Định dạng màu sắc cơ bản của web*/
+    --primary: #ff0000;
+    --secondary: #f1f0e1;
+    --accent: #ffd800;
+    --gray-light: #fffce3;
+    --gray: #154598;
+    --transition: all 0.3s ease; /*nhấc, tưng khi di chuột vào*/
+}
+body{
+    margin:0;
+    padding:0;
+}
+body h1{ /*Định dạng kiểu chữ toàn web*/
+    font-family: "Calistoga", serif; /**/
+    font-weight:400;
+    color: var(--primary); /**/
+    line-height: 1.6; /*Dộ dài của phần tựa đề */
+    overflow-x: hidden;
+}
+
+body h2{ /*Định dạng kiểu chữ toàn web*/
+    font-family: "Calistoga", serif; /**/
+    font-weight: 400;
+    color: var(--secondary); /**/
+    line-height: 1.6; /*Dộ dài của phần tựa đề */
+    overflow-x: hidden;
+}
+
+
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Utility classes */
+.btn-primary {
+    background-color: beige;
+    color: #04086c;
+}
+
+
+.grid {
+    display: grid;
+}
+
+/* Style header */
+header {
+    position: fixed;/*Giữ phần header khi lướt*/
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 0.8rem 0;/*khoảng cách trên dưới là 0.8 rem, trái phải là 0*/
+    background-color: var(--secondary);
+    z-index: 100;/*header luôn nằm  trên hầu hết hết các phần tử khác của trang*/
+    transition: var(--transition);
+}
+
+.header-container { /*Khung chứa header*/
+    display: grid;
+    grid-template-columns:2fr auto 2fr;
+    justify-content:space-between;/*đảm bảo các cột dàn đều và chiếm toàm bộ độ rộng*/
+    gap:8rem;
+    align-items: center;
+}
+/* logo Vinamilk trên thanh header */
+.logo {
+    justify-self: start;
+}
+
+.logo img {
+    height: 40px; /* hoặc kích thước bạn muốn */
+    object-fit: contain;
+    justify-self: start;
+    /*Thanh header /Shop/Home/Collection*/
+}
+.nav-menu {
+    display: grid;
+    /*Không cần thiết */grid-auto-flow:column;/*xếp thep chiều ngang*/
+    gap: 1rem;
+    align-items:center;
+    grid-template-columns:repeat(4,1fr);
+    justify-content:space-between;
+    position: relative;
+}
+
+.nav-link{
+    font-weight: 400;
+    transition: var(--transition);
+    position: relative;
+    font-family: "Calistoga", serif;
+    color:var(--gray);
+    align-content:center;
+    text-decoration:none;
+}
+
+.menu-item{
+    position:relative;
+}
+
+/*.nav-link::after {*/ /*Định dạng style sau nav-link*/
+    /*content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: var(--primary);
+    transition: var(--transition);
+}*/
+
+/*.nav-link:hover::after {
+    width: 100%;
+}*/
+
+.sub-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    list-style: none;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: var(--transition);
+    z-index: 100;
+    border: 2px solid blue;
+}
+
+.sub-menu:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.menu-item:hover 
+.sub-menu {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.sub-item{
+    border-bottom: 1px solid #f1f1f1;
+    text-decoration:none;
+    list-style:none;
+}
+
+.sub-item:last-child{
+    border-bottom:none;
+}
+
+.sub-item a{
+    display:block;
+    padding: 0.8rem 1.2rem;
+    white-space: nowrap;
+    text-decoration:none;
+    transition:var(--transition)
+}
+
+
+
+.header-actions { /*Định dạng các thành phần có thể tương tác*/
+    display: grid;
+    grid-template-columns:repeat(3,1fr);
+    justify-content:space-between;
+    gap: 0.5rem;
+    align-items: center;
+}
+
+.header-actions i {
+    background: none;
+    color:var(--gray);
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.container-wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+/* Phần giới thiệu */
+
+.hero {
+    position: relative;
+    width: 100%;
+    height: 100vh; /* hoặc chiều cao bằng header */
+    overflow: hidden;
+    margin:0;
+    padding:0;
+}
+
+.hero-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%; /* quan trọng: phải có height */
+    object-fit: cover; /* co giãn, cắt bớt nhẹ */
+    display:block;
+}
+
+.hero-header.container{
+    display: grid;
+    grid-template-columns: 1fr 1fr;  
+    align-items: center;
+    width: 100%;
+    max-width:100%;
+    padding:0;
+    margin:0;
+}
+/*Phần giời thiệu thành viên ở trang shop*/
+.hero-produce.container{
+    display:grid;
+    grid-template-columns:1fr 2fr;
+    align-items:center;
+    width:100%;
+    max-width:100%;
+    padding:1rem;
+    margin:0;
+    background-color:var(--secondary);
+}
+.hero-image,
+.hero-map {
+    width: 100%;
+    height: 100%;
+}
+
+.hero-image img,
+.hero-map iframe{
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* hình ảnh vừa khung */
+}
+
+.hero-content {
+    padding: 3rem;
+    background-color: var(--gray);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+   
+}
+.hero-produce h1 {
+    font-weight: 200;
+    font-size: 50px;
+    color: white;
+    padding: 3rem 1rem;
+    justify-content: start;
+}
+.hero-produce p{
+    color:white;
+    font-weight:100;
+    font-size:30px;
+    
+}
+.hero-header h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color:var(--secondary);
+}
+
+.hero-header p {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    padding-top:3rem;
+}
+/* Shop now */
+.hero-header .btn {
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    display: inline-block;
+    text-decoration: none;
+    background-color:#0b9216;
+    color:var(--gray);
+    border: none;
+    border-radius: 4px;
+    width: fit-content;
+}
+
+
+/*Chữ Shop Now ở background logo*/
+.btn {
+    display: inline-block;
+    padding: 0.5rem 2rem; /*Khung phần Shop Now dài rộng*/
+    color: var(--gray);
+    background-color: #0b9216; border: none; /*loại bỏ viền mặc định của thẻ<a> or <button> */
+    font-weight: 500;
+    cursor: pointer; /*khi di chuột vào sẽ đổi từ chuột thành con trỏ bàn tay*/
+    transition: var(--transition); /*tưng*/
+    font-family: "Newsreader", serif;
+}
+
+.btn:hover {
+    background-color: var(--secondary); /*Khi di chuột vào Shop Now sẽ có màu nổi l3n6 ở Shop Now */
+    transform: translateY(-3px); /*Khi di chuột vào Shop Now thì nó nhấc lên*/
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    /*0: bóng k lệch sang trái phải, 10px: bộng lệch xuống dưới 1px, 20px, bòng mờ đi, ...: bóng màu đen trong suốt 10%*/
+}
+
+.letter-btn {
+    background-color: var(--secondary);
+}
+/* Phần sản phẩm */
+
+.container { /*Định dạng khung chứa cho web*/
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding:20px;
+}
+
+.section {
+    padding: 6rem 0; /* chỉnh ảnh phần collection trong dài rộng trên dưới: 6rem trái phải:0*/
+    box-sizing:border-box;
+    background-color:var(--secondary);
+}
+/*chữ Những bộ sưu tập cũa B&B trong collection*/
+.section-title {
+    color: var(--gray);
+    font-size: 3.2rem; /*Phóng to chữ Featured product*/
+    font-weight: 700; /*giống in đậm font chữ*/
+    text-align: center; /*Căn chỉnh ở giữa*/
+    margin-bottom: 3rem; /*Khoảng cách từ Featured product đến phần sp ở dưới*/
+}
+/*Về phần chia khung thì sẽ để nó tự chi nhìu cột nhất có thể nhỏ nhất là 280px và 
+    rộng nhất là 1fr tùy vào khung hình
+*/
+.products-grid {
+    display:grid;
+    padding:20px 0;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+}
+
+.product-card {
+    background-color:var(--secondary);
+    border-radius:10px;
+    display:flex;
+    flex-direction:column;
+    transition: var(--transition); /*tưng ở phần :root trên đầu*/
+    position: relative;/*giữ nguyên vị trí ban đầu*/
+}
+
+    .product-card:hover {
+        transform: translateY(-3px); /*tưng phần sp lên 3px*/
+    }
+
+.product-image {
+    object-fit:cover;
+    width: 100%; /**/
+    height: 350px; /**/
+    background-color: var(--gray-light); /*màu nền của hình sp*/
+    margin-bottom: 1.5rem; /*Khoảng cách giữa sp và phần miêu tả */
+    position: relative;
+    overflow: hidden;/*ẩn phần content tràn ra ngoài*/
+}
+
+/*Tên sp và giá tiền*/
+.product-info {
+    text-align: center; /**/
+    padding:20px;
+    display:flex;
+    flex-direction:column;
+    flex-grow:1;
+}
+/*Tên sp*/
+.product-name {
+    color:var(--gray);
+    font-weight: 400; /*in đậm tên sp*/
+    margin-bottom: 0.2rem; /*Khoảng cách giữa cost và tên sp (khoản cách dưới tên sp)*/
+}
+/*giá tiền*/
+.product-price {
+    color: var(--gray); /*màu chữ cost*/
+    font-family: "Newsreader", serif;
+    font-weight:400;
+}
+.product-description {
+    color: black;
+    font-size: 0.9rem;
+    line-height: 1.5;
+    margin-bottom: 15px;
+    flex-grow: 1;
+}
+
+.product-price {
+    font-size: 1.3rem;
+    font-weight: 700;
+    color:red;
+    margin-bottom: 15px;
+}
+
+
+    /*Phần sản phẩm ra mắt trang Home*/
+
+.products-vertical {
+    display: flex;
+    flex-direction: column;
+    gap:2rem;
+    max-width: 1200px;
+}
+
+.product-item {
+    display: grid;
+    grid-template-columns: 3fr 1fr; /* Chia đôi ảnh và thông tin */
+    gap: 10px;
+    align-items: center;
+    border-radius: 15px;
+    padding: 10px;
+}
+
+.product-item:hover {
+    transform: translateY(-3px); /*tưng phần sp lên 3px*/
+}
+
+.product-img {
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+    border-radius: 12px;
+    transition: transform 0.3s ease;
+}
+
+
+
+.product-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 20px;
+}
+
+.product-tittle {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--secondary);
+}
+
+
+/* Phần about */
+.about {
+    background-color: var(--gray-light);
+}
+
+.about-grid {
+    grid-template-columns: 1fr 1fr; /*phân chia giữa vd và miêu tả giới thiệu shop*/
+    gap: 4rem;
+    align-items: center; /*Nguyên phần giới thiệu của vd căn chỉnh*/
+}
+
+.about-image { /*Phần vd */
+    width: 100%;
+    height: 500px;
+}
+
+.about-image audio {
+    width: 800px;
+    height: 500px;
+    aspect-ratio: 16/10;
+}
+
+.about-content h3 {
+    font-size: 2rem;
+    margin-bottom: 2rem; /*Khoảng cách giữa mô tả và tựa đề phần vd*/
+    font-family: "Calistoga", serif;
+    letter-spacing: 1.0px;
+    color: var(--primary); /**/
+    overflow-x: hidden;
+}
+
+.about-content p {
+    margin-bottom: 0; /*Khoảng cách*/
+    color: var(--gray); /**/
+    font-size: 1rem; /*Phóng to nhỏ phần mô tả nhỏ cũa vd*/
+    font-weight: 400;
+    font-family: "Newsreader", serif;
+    letter-spacing: 0.5px;
+    overflow-x: hidden;
+}
+body h2 {
+    font-family: "Calistoga", serif; /**/
+    font-weight: 400;
+    color: var(--primary); /**/
+    line-height: 1.6; /*Dộ dài của phần tựa đề */
+    overflow-x: hidden;
+}
+
+/*Phần mô tả*/
+.carbon-neutral-section {
+    padding: 4rem 2rem;
+    background-color:VAR(--secondary);
+}
+
+.carbon-container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.carbon-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    background-color:var(--gray);
+}
+.carbon-image {
+    width: 100%;
+    height: auto;
+    margin:0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carbon-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display: block;
+}
+.carbon-header h2 {
+    font-size: 2.5rem;
+    color:var(--secondary);
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.carbon-header .subtitle {
+    font-size: 1.2rem;
+    color: var(--secondary);
+    line-height: 1.6;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.carbon-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    align-items: start;
+}
+
+.carbon-item {
+    background:#fffce3;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+
+
+.carbon-item h3 {
+    font-size: 1.3rem;
+    color: var(--gray);
+    margin-bottom: 1rem;
+    line-height: 1.4;
+    font-weight: 800;
+    text-align:center;
+}
+
+.carbon-item p {
+    color: var(--gray);
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* Phần đăng kí thành viên */
+.newsletter {
+    text-align: center; /*căn chỉnh chữ ở giữa*/
+    padding: 4rem 0rem; /*dài rộng của nền nâu join our community*/
+    background-color: saddlebrown; /**/
+    color: var(--secondary); /**/
+}
+
+.newsletter-title {
+    font-size: 2rem; /**/
+    margin-bottom:0; /**/
+}
+
+.newsletter-text {
+    margin-bottom: 1rem; /*K/c giữa your email và phần mô tả phía trên*/
+    opacity: 0.8;
+    font-weight:400;
+}
+
+.newsletter-form {
+    display: flex;
+    max-width: 500px;
+    margin: 0 auto; /*Căn chỉnh nguyên khung yout email sub*/
+}
+
+.newsletter-input {
+    flex: 1;
+    padding: 1rem;
+    border: none;
+    font-family: "Calistoga", serif; /**/
+}
+
+.newsletter-btn { /*Giống với Shop Now và Learn More nhưng k có tưng tưng*/
+    display: inline-block;
+    padding: 1rem 2.5rem; /*Khung phần Shop Now dài rộng*/
+    background-color: var(--primary); /**/
+    color: var(--secondary); /**/
+    border: none;
+    font-weight: 800;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.newsletter-btn:hover { /*Giống với shop noe và learn more nhưng k có tưng tưng*/
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    background-color: var(--accent);
+}
+
+/* Footer */
+footer {
+    padding: 2rem 0 2rem; /*rem1: k/c giữa trên tới chữ, rem2: k/c trái phải cũa chữ, rem3: là cuối page đến chữ*/
+    background-color: var(--gray-light); /**/
+}
+
+.footer-grid {
+    grid-template-columns: repeat(3,1fr); /*3 là gồm có 3 dòng sẽ chia đều còn kia thì k biết*/
+    gap: 8rem; /*Khoảng cách giữa 3 dòng đó*/
+    margin-bottom: 1rem; /*Khoàng cách của 3 dòng với HS,TS*/
+}
+
+.footer-column h4 {
+    font-size: 1.2rem;
+    margin-bottom: 1.5rem;
+    position: relative;
+    display: inline-block;
+}
+
+.footer-column h4::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    width: 30px;
+    height: 2px;
+    background-color: var(--accent);
+}
+
+.footer-links {
+    list-style: none;
+}
+
+.footer-link {
+    margin-bottom: 0.8rem;
+    transition: var(--transition);
+}
+
+.footer-link:hover {
+    color: var(--accent);
+    padding-left: 5px;
+}
+
+.footer-bottom {
+    text-align: center;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    color: var(--gray);
+    font-size: 0.9rem;
+}
+/*New Product*/
+
+
+/* Container chứa toàn bộ slider */
+.slider-container {
+    position: relative; /* Cho phép các phần tử con (mũi tên) định vị tuyệt đối bên trong */
+    width: 100%; /* Chiếm toàn bộ chiều rộng của phần tử cha */
+    height: 400px; /* Đặt chiều cao cố định là 400px */
+    overflow: hidden; /* Ẩn phần nội dung vượt ra ngoài khung (các slide khác) */
+}
+
+/* Khung chứa tất cả các slide */
+.slider {
+    display: flex; /* Sắp xếp các slide theo hàng ngang */
+    transition: transform 0.5s ease-in-out; /* Hiệu ứng chuyển động mượt mà trong 0.5s */
+    height: 100%; /* Chiếm toàn bộ chiều cao của container */
+}
+
+/* Từng slide riêng lẻ */
+.slide {
+    min-width: 100%; /* Mỗi slide chiếm toàn bộ chiều rộng container */
+    height: 100%; /* Chiếm toàn bộ chiều cao */
+    display: flex; /* Sử dụng flexbox để căn giữa ảnh */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    background-color: var(--gray); /* Màu nền xám (sử dụng biến CSS) */
+}
+
+    /* Ảnh bên trong mỗi slide */
+    .slide img {
+        max-width: 100%; /* Ảnh không vượt quá chiều rộng slide */
+        max-height: 100%; /* Ảnh không vượt quá chiều cao slide */
+        object-fit: contain; /* Giữ tỷ lệ ảnh, co dãn để vừa khung nhưng không crop */
+    }
+
+
+
+/* Nút mũi tên điều hướng */
+.arrow {
+    position: absolute; /* Định vị tuyệt đối trong slider-container */
+    top: 50%; /* Đặt ở giữa theo chiều dọc */
+    transform: translateY(-50%); /* Dịch chuyển lên 50% chiều cao để căn giữa chính xác */
+    background-color: rgba(0, 0, 0, 0.5); /* Nền đen với độ trong suốt 50% */
+    color: white; /* Màu chữ trắng */
+    border: none; /* Không viền */
+    width: 50px; /* Chiều rộng cố định */
+    height: 50px; /* Chiều cao cố định */
+    border-radius: 50%; /* Bo tròn thành hình tròn */
+    font-size: 24px; /* Kích thước chữ (icon mũi tên) */
+    cursor: pointer; /* Hiện con trỏ dạng tay khi hover */
+    display: flex; /* Sử dụng flexbox để căn giữa icon */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    transition: background-color 0.3s; /* Hiệu ứng chuyển màu nền trong 0.3s */
+    z-index: 10; /* Đảm bảo mũi tên luôn nổi trên cùng */
+}
+
+    /* Hiệu ứng khi di chuột vào mũi tên */
+    .arrow:hover {
+        background-color: rgba(0, 0, 0, 0.8); /* Đậm hơn khi hover (80% opacity) */
+    }
+
+/* Mũi tên bên trái */
+.prev {
+    left: 15px; /* Cách lề trái 15px */
+}
+
+/* Mũi tên bên phải */
+.next {
+    right: 15px; /* Cách lề phải 15px */
+}
+
+/*section new product*/
+.newpro {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Hai cột bằng nhau */
+    gap: 5px; /* Khoảng cách giữa hai ảnh */
+    align-items: center; /* Căn giữa theo chiều dọc */
+    justify-content: center; /* Căn giữa theo chiều ngang */
+    max-width: 1200px; /* Giới hạn chiều rộng tối đa */
+    margin: 0 auto; /* Căn giữa section */
+    padding:5px; /* Khoảng cách bên trong */
+}
+
+.newpro-imageleft,
+.newpro-imageright {
+    width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.newpro-imageleft img,
+.newpro-imageright img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    object-fit: cover; /* Hoặc contain tuỳ theo nhu cầu */
+    border-radius: 8px; /* Bo góc nhẹ (tuỳ chọn) */
+}
+
+.newpro-vd { /*Phần vd */
+    width: 100%;
+    max-width: 1200px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+}
+
+.about-image audio {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/10; /* Tỷ lệ khung hình */
+    object-fit: cover; /* Hoặc contain tuỳ theo nhu cầu */
+}
+
+
+/*Contact*/
+.location-selector h1 {
+    color: var(--gray); /* Thay đổi giá trị này */
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+}
+
+.location-selector h2 {
+    color: var(--gray); /* Thay đổi giá trị này */
+    font-size: 1.8rem;
+    margin: 30px 0 20px;
+    border-bottom: 2px solid #ddd;
+    padding-bottom: 10px;
+}
+.city-section {
+    display: none; /* Mặc định ẩn tất cả */
+}
+
+    /* Hiển thị section khi có class active */
+    .city-section.active {
+        display: grid;
+    }
+.filter-section {
+    background-color: Var(--secondary);
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    border: 1px solid #dee2e6;
+}
+
+.filter-section h4 {
+    margin-top: 0;
+    color:var(--gray);
+    margin-bottom: 15px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+    display: inline-block;
+    margin-right: 15px;
+}

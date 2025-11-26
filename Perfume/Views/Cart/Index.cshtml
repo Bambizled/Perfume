@@ -1,0 +1,202 @@
+﻿@model List<Perfume.Models.CartItem>
+
+@{
+    ViewBag.Title = "Giỏ Hàng";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+<link href="~/Content/MainStyles.css" rel="stylesheet" />
+<link href="~/Content/ResponsiveStyle.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+
+
+    .containergiohang {
+        padding: 7rem 2rem;
+        background-color: beige;
+        width: 100%;
+        margin: 2rem auto;
+        min-height:200vh;
+    }
+
+    .form-conateiner {
+        background-color: #a9bafd;
+        border-radius: 10px;
+        padding: 1rem 2rem;
+    }
+    .form-control {
+        width: 200px;
+        padding: 0;
+        border: 3px solid darkblue;
+        border-radius: 5px;
+        box-sizing: border-box;
+    }
+
+        .form-control:focus {
+            border-color: #80bdff;
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25); /* Tạo hiệu ứng focus */
+        }
+    .form-group {
+        display: flex;
+        margin-bottom: 10px;
+        float:left;
+        justify-content: unset;
+        gap: 1rem;
+    }
+        .form-group label {
+            display: block; /* Đảm bảo label chiếm hết chiều rộng và nằm trên input */
+            margin-bottom: 5px;
+            font-weight: bold; /* In đậm chữ label */
+            color: #333;
+        }
+    .form-label label {
+        width: 200px;
+        font-weight: 600;
+        color: #2c3e50;
+        padding-right: 15px;
+        text-align: left;
+    }
+
+    .form-input textarea {
+        border-radius: 10px;
+        background-color: beige;
+        color: #091e7c;
+        font-weight: 500;
+    }
+
+    .table {
+        padding: 1rem 2rem;
+        width:100%;
+        background-color: white;
+        color: black;
+        display: flex;
+        justify-content:left;
+    }
+
+    .tableth-tr {
+        color: #9a0f0f;
+        font-size: inherit;
+    }
+
+    .tabletd-tr {
+        color: #091e7c;
+    }
+
+    .btn-today {
+        color: #091e7c;
+        background-color: lightblue;
+        font-weight: 600;
+        padding: 1rem 2rem;
+    }
+
+    .btn-trash {
+        color: darkred;
+    }
+
+    .total-amount {
+        font-size: 1.5rem;
+        font-weight: bold;
+        color: #e74c3c;
+        margin-top: 0.5rem;
+    }
+
+    .btn-yesterday input {
+        background-color: lightblue;
+        color: #091e7c;
+        border: none;
+        border-radius: 8px;
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+    }
+
+    .form-check-input option {
+        border-radius: 10px;
+        height: 20px;
+        width: 50px;
+    }
+
+    @@media(max-width:746px) {
+        .containergiohang {
+            padding-top:10rem;
+        }
+        .form-conateiner{
+            height:300px;
+        }
+    }
+</style>
+<div class="containergiohang">
+    <h2 style="color:#091e7c">THANH TOÁN</h2>
+    @Html.ActionLink("Tiếp Tục Mua Hàng", "IndexCustomer", "Product", null, new { @class = "btn btn-today" })
+    @if (!Model.Any())
+    {
+        <p>Giỏ Hàng Hiện Tại Đang Trống</p>
+    }
+    else
+    {
+        <table class="table">
+            <tr class="tableth-tr">
+                @*<th>Mã Sản Phẩm</th>*@
+                <th>Tên Sản Phẩm</th>
+                <th>Số Lượng</th>
+                <th>Đơn Giá</th>
+                <th>Thành Tiền</th>
+                <th></th>
+            </tr>
+            @foreach (var item in Model)
+            {
+                <tr class="tabletd-tr">
+                    @*<td>@item.idPro</td>*@
+                    <td>@item.namePro</td>
+                    <td>@item.quantity</td>
+                    <td>@item.price</td>
+                    <td>@item.total</td>
+                    <td>
+                        <a href="@Url.Action("Remove","Cart", new {id=item.idPro})" class="btn btn-trash">
+                            <i class="fa-solid fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+        //Tổng tiền
+        <div class="total-amount">
+             Tổng Thành Tiền: @ViewBag.Total
+        </div>
+        //HIển thị thông tin khách hàng cần giao
+        <div class="form-conateiner">
+            <form action="@Url.Action("ThanhToan","Cart")" method="post" class="form-action">
+                <div class="from-group">
+                    <label class="form-lable">Chọn Khách Hàng</label>
+                        <select name="IDCus" class="form-control">
+                            @foreach (var cus in new Perfume.Models.DBVinamilkEntities().Customer.ToList())
+                            {
+                                <option value="@cus.IDCus">@cus.NameCus</option>
+                            }
+                        </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Số điện thoại</label>
+                    <div class="form-input">
+                        <textarea name="SDT" placeholder="Nhập số điện thoại"></textarea>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Nhập địa chỉ nhận hàng</label>
+                    <div class="form-input">
+                        <textarea name="DCNHanHang" placeholder="Nhập địa chỉ nhận hàng đầy đủ"></textarea>
+                    </div>
+                </div>
+                <div class="btn btn-yesterday">
+                    <input type="submit" value="Thanh Toán" />
+                </div>
+            </form>
+        </div>
+        
+
+    }
+
+</div>
+

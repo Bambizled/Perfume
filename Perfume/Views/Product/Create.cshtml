@@ -1,0 +1,105 @@
+﻿@model Perfume.Models.Products
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+<link href="~/Content/MainStyles.css" rel="stylesheet" />
+<link href="~/Content/ResponsiveStyle.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .form-container {
+        min-height: 80vh;
+        background-color:#0d2178;/**/
+        padding:8rem 2rem;
+        display:flex;
+        align-items:center;
+        justify-content:center;
+    }
+
+    .create-form {
+        background-color:beige;
+        padding: 2rem;
+        border-radius: 10px;
+        max-width: 600px;
+        margin: 0 auto;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+        width:100%;
+    }
+
+    .form-label {
+        font-weight: bold;
+        margin-bottom: 5px;
+        display: block;
+        color: #0d2178;
+    }
+    .form-control {
+        border-radius: 8px;
+        padding: 8px 15px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        width: 100%;
+        box-sizing: border-box;
+    }
+    .text-danger {
+        font-size: 0.9rem;
+        margin-top: 3px;
+        display: block;
+        color: #0d2178;
+    }
+</style>
+
+<div class="form-container">
+    <div class="create-form">
+        <h2 class="text-center mb-4">Thêm Mới Sản Phẩm</h2>
+
+        @using (Html.BeginForm("Create", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                <label class="form-label">Tên sản phẩm</label>
+                @Html.EditorFor(m => m.NamePro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.NamePro, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Mô tả</label>
+                @Html.EditorFor(m => m.DecriptionPro, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.DecriptionPro, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Giá</label>
+                @Html.EditorFor(m => m.Price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(m => m.Price, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Thể Loại</label>
+                @Html.DropDownListFor(m => m.IDCate, (SelectList)ViewBag.ListCate,"STTT, SCA, SCU, SBEB,..." ,new { @class = "form-control" })
+                @Html.ValidationMessageFor(m => m.IDCate, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Hình ảnh</label>
+                <div class="mb-2">
+                    <img src="~/Image/GT_VNM/xe.png" width="250" height="150"  />
+                </div>
+                <input type="file" name="ImagePath" id="ImagePath" class="form-control" />
+                @Html.ValidationMessageFor(m => m.ImagePro, "", new { @class = "text-danger" })
+            </div>
+
+            <div class="text-center">
+                <input type="submit" value="Lưu" class="btn btn-primary btn-lg" />
+                <a href="@Url.Action("Index")" class="btn btn-secondary btn-lg">Quay lại</a>
+            </div>
+        }
+    </div>
+</div>
+
+

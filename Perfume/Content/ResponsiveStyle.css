@@ -1,0 +1,288 @@
+﻿/* Rất lớn: >= 1200px */
+@media (min-width: 1200px) {
+   
+    .container {
+        width: 90%;
+        max-width: 1200px;
+    }
+
+    .hero {
+        padding-top: 9rem;
+    }
+
+    .hero-content {
+        max-width: 700px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.2rem;
+    }
+
+    .btn {
+        font-size: 1.2rem;
+        padding: 1rem 3rem;
+    }
+
+    .nav-menu {
+        gap: 2.5rem;
+    }
+
+    .header-actions {
+        gap: 1.5rem;
+    }
+
+}
+
+/* Lớn: 976px – 1199px */
+@media (min-width: 976px) and (max-width: 1199px) {
+    .container {
+        width: 92%;
+        max-width: 1100px;
+    }
+
+    .hero-content {
+        max-width: 650px;
+    }
+
+    .hero-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .btn {
+        font-size: 1.1rem;
+        padding: 0.9rem 2.5rem;
+    }
+
+    .nav-menu {
+        gap: 2rem;
+    }
+
+    .header-actions {
+        gap: 1.2rem;
+    }
+   
+}
+
+/* Trung bình: 769px – 975px */
+@media (min-width: 769px) and (max-width: 975px) {
+    header {
+        padding: 0.5rem;
+    }
+
+    .header-container {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        text-align: center;
+    }
+    .container {
+        width: 94%;
+        max-width: 960px;
+    }
+
+    .hero-content {
+        max-width: 600px;
+    }
+
+    .hero-subtitle {
+        font-size: 1rem;
+    }
+
+    .btn {
+        font-size: 1rem;
+        padding: 0.8rem 2rem;
+    }
+
+    .nav-menu {
+        gap: 1.5rem;
+    }
+
+    .header-actions {
+        gap: 1rem;
+    }
+    /*vd ở trang new product*/
+    .newpro-vd {
+        max-width: 967px;
+        padding: 0 40px;
+    }
+
+    .newpro-vd audio {
+        aspect-ratio: 16/8; /* Tỷ lệ phổ biến hơn trên mobile */
+    }
+    .products-vartical{
+        gap:1rem;
+    }
+}
+
+/* Nhỏ: 477px – 768px */
+@media (min-width: 477px) and (max-width: 768px) {
+    header{
+        padding:0.5rem;
+    }
+    .header-container{
+        display:grid;
+        grid-template-columns:1fr;
+        gap:1rem;
+        text-align:center;
+    }
+    .container {
+        width: 96%;
+        max-width: 720px;
+    }
+
+    .hero {
+        display:grid;
+        grid-template-columns: 1fr; /* xếp thành 1 cột */
+        height: 60vh;
+    }
+    .hero-bg{
+        width:100%;
+        height:auto;
+    }
+    .hero-header.container {
+        display:grid;
+        grid-template-columns:1fr;
+        font-size: 0.9rem; /* giảm kích thước chữ */
+        padding: 1rem; /* giảm khoảng cách */
+    }
+    .hero-content,.hero-image{
+        width:100%;
+    }
+    .hero-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .hero-header p {
+        font-size: 1rem;
+    }
+
+    .btn {
+        font-size: 0.95rem;
+        padding: 0.7rem 1.8rem;
+    }
+
+    .nav-menu {
+        gap: 1rem;
+        justify-content: center;
+    }
+
+    .header-actions {
+        gap: 0.8rem;
+        justify-content: center;
+    }
+    .carbon-neutral-section {
+        padding: 2rem 1rem;
+    }
+
+    .carbon-header h2 {
+        font-size: 2rem;
+    }
+
+    .carbon-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .carbon-item {
+        padding: 1.5rem;
+    }
+
+    .carbon-number {
+        font-size: 2.5rem;
+    }
+    /*section của trang new product*/
+    .newpro {
+        grid-template-columns: 1fr; /* Chuyển thành 1 cột */
+        gap: 15px;
+        padding: 30px 15px;
+    }
+
+    .newpro-imageleft img,
+    .newpro-imageright img {
+        max-width: 90%; /* Giảm kích thước ảnh trên tablet */
+    }
+    /* VD ở tranh newproduct*/
+    .newpro-vd {
+        padding: 0 15px;
+        margin: 30px auto;
+    }
+
+        .newpro-vd audio {
+            aspect-ratio: 16/9; /* Tỷ lệ phổ biến hơn trên mobile */
+        }
+}
+
+/* Rất nhỏ: <= 476px */
+@media (max-width: 476px) {
+    .container {
+        width: 100%;
+        padding: 0 1rem;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        text-align: center;
+    }
+
+    .hero-subtitle {
+        font-size: 0.9rem;
+    }
+
+    .btn {
+        font-size: 0.9rem;
+        padding: 0.6rem 1.5rem;
+        width: 100%;
+    }
+
+    .nav-menu {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        justify-items: center;
+    }
+
+    .header-actions {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        justify-items: center;
+    }
+    .carbon-neutral-section {
+        padding: 2rem 1rem;
+    }
+
+    .carbon-header h2 {
+        font-size: 2rem;
+    }
+
+    .carbon-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .carbon-item {
+        padding: 1.5rem;
+    }
+
+    .carbon-number {
+        font-size: 2.5rem;
+    }
+    /*section của trang new product*/
+    .newpro {
+        gap: 10px;
+        padding: 20px 10px;
+    }
+
+    .newpro-imageleft img,
+    .newpro-imageright img {
+        max-width: 100%; /* Ảnh chiếm toàn bộ chiều rộng trên mobile */
+    }
+    /* VD ở tranh newproduct*/
+    .newpro-vd {
+        padding: 0 10px;
+        margin: 20px auto;
+    }
+}
+
+
+
+

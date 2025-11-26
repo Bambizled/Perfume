@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinamilk</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Allura&family=Calistoga&family=Newsreader:ital,opsz,wght@0,6..72,200..800;1,6..72,200..800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/Views/Home/ResponsiveStyle.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/css/all.min.css" rel="stylesheet" />
+    <script scr="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.1/js/all.min.js"></script>
+    <link rel="stylesheet" href="~/Content/MainStyles.css" />
+    <link rel="stylesheet" href="~/Scripts/JavaScriptNewPro.js" />
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-container">
+            <a href="/Home/Home" class="logo">
+                <img src="~/Image/GT_VNM/Vinamilk_new_logo.svg.png" />
+            </a>
+
+            <nav class="nav-menu">
+                <div class="menu-item">
+                    <a href="/Home/Home" class="nav-link">Home</a>
+                </div>
+                <div class="menu-item">
+                    <a href="/Home/Shop" class="nav-link">Shop</a>
+                </div>
+                <div class="menu-item">
+                    <a href="/Home/Collection" class="nav-link">Collections</a>
+                    <div class="sub-menu">
+                        <div class="sub-item">
+                            <a href="/Home/STTT">Sữa tươi tiệt trùng</a>
+                        </div>
+                        <div class="sub-item">
+                            <a href="/Home/SB">Sữa bột em bé</a>
+                        </div>
+                        <div class="sub-item">
+                            <a href="/Home/SCU">Sữa chua uống</a>
+                        </div>
+                        <div class="sub-item">
+                            <a href="/Home/SCA">Sữa chua ăn</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="menu-item">
+                    <a href="/Home/Contact" class="nav-link">Contact</a>
+                </div>
+            </nav>
+
+            <div class="header-actions">
+                <i class="fa-solid fa-phone"></i>
+                <a href="@Url.Action("Index","Cart")">
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    @ViewBag.Count
+                </a>
+                <a href="@Url.Action("Index","LoginRegister")">
+                    <i class="fa-solid fa-circle-user"></i>
+                </a>
+            </div>
+        </div>
+    </header>
+    <div>@RenderBody()</div>
+</body>
+</html>

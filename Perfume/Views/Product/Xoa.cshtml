@@ -1,0 +1,116 @@
+﻿@model Perfume.Models.Products
+
+@{
+    ViewBag.Title = "Xoa";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+<link href="~/Content/MainStyles.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/ResponsiveStyle.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .text-danger {
+        font-size: 0.9rem;
+        margin-top: 3px;
+        display: block;
+        color: #0d2178;
+    }
+    .form-container {
+        min-height: 80vh;
+        background-color: #0d2178; /**/
+        padding: 8rem 2rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .create-form {
+        background-color: beige;
+        padding: 2rem;
+        border-radius: 10px;
+        width: 100%;
+        margin: 1rem;
+    }
+    .table{
+        width:100%;
+        padding:1rem;
+    }
+</style>
+<div class="form-container">
+    <div class="create-form">
+        <h2 cass="text-center">Xác Nhận Xóa Sản Phẩm</h2>
+        @using (Html.BeginForm("Xoa", "Product", FormMethod.Post, new { enctype = "multipart/form-data" }))
+        {
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(m => m.ProductID)
+            <table class="table">
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.NamePro)</th>
+                    <td>@Html.DisplayFor(m => m.NamePro)</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.ValidationMessageFor(m => m.NamePro)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.DecriptionPro)</th>
+                    <td>@Html.DisplayFor(m => m.DecriptionPro)</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.ValidationMessageFor(m => m.DecriptionPro)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.Price)</th>
+                    <td>@Html.DisplayFor(m => m.Price)</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.ValidationMessageFor(m => m.Price)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.IDCate)</th>
+                    <td>@Html.DropDownListFor(n => n.IDCate, (SelectList)ViewBag.ListCate, "Chọn danh mục", new { @readonly = "readonly" })</td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.ValidationMessageFor(m => m.IDCate)
+                    </td>
+                </tr>
+
+                <tr>
+                    <th>@Html.DisplayNameFor(m => m.ImagePro)</th>
+                    <td>
+                        <img src="@Url.Content(Model.ImagePro)" width="150" height="150" id="previewImage" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        @Html.ValidationMessageFor(m => m.ImagePro)
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2">
+                        <input type="submit" value="Xóa sản phẩm" class="btn btn-danger" />
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="color:red">
+                        @if (ViewBag.errXoa != null)
+                        {
+                            @ViewBag.errXoa;
+                        }
+                    </td>
+                </tr>
+            </table>
+        }
+    </div>
+</div>
+
+

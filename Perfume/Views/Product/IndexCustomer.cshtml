@@ -1,0 +1,96 @@
+﻿@model IEnumerable<Perfume.Models.Products>
+
+@{
+    ViewBag.Title = "IndexCustomer";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+<link href="~/Content/MainStyles.css" rel="stylesheet" />
+<link href="~/Content/ResponsiveStyle.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-primary {
+        background-color:beige;
+        color: #04086c;
+    }
+    .carbon-header a {
+        font-size: xx-large;
+        padding: 0.4rem 2rem;
+        border-radius: 5px;
+        color: darkred;
+        background-color:beige;
+    }
+</style>
+<div class="carbon-container"style="padding-top:10rem">
+    <div class="carbon-header">
+        <h2>
+            @if (Session["NameUser"] == null)
+            {
+                <span>Bạn chưa đăng nhập</span>
+            }
+            else
+            {
+                <span>Xin chào @Session["NameUser"]</span>
+            }
+        </h2>
+        <p style="padding:1rem 2rem">
+            <a href="@Url.Action("Logout","LoginRegister")">
+                <i class="fa-solid fa-arrow-right-from-bracket"></i>
+            </a>
+        </p>
+    </div>
+</div>
+@using (Html.BeginForm("Index", "Product", FormMethod.Get))
+{
+    <div class="filter-section">
+
+        <div class="form-group">
+            <label>Giá từ:</label>
+            <input type="number" name="_min" value="1" class="form-control" style="width: 150px; display: inline-block;" />
+        </div>
+
+        <div class="form-group">
+            <label>Đến:</label>
+            <input type="number" name="_max" value="1" class="form-control" style="width: 150px; display: inline-block;" />
+        </div>
+
+        <div class="form-group">
+            <label>Danh mục:</label>
+            @Html.DropDownList("_category", ViewBag.Categories as SelectList, "Tất cả danh mục", new { @class = "form-control" })
+        </div>
+
+        <input type="submit" value="Chọn Lọc" />
+    </div>
+
+}
+<div class="container" >
+    <h2 class="section-tittle">Danh Sách Sản Phẩm Muốn Quyên Góp</h2>
+    <div class="products-grid grid">
+        @foreach (var pro in Model)
+        {
+            <div class="product-card">
+                <img src="@Url.Content(pro.ImagePro)" class="product-image" alt="@pro.NamePro" />
+                <div class="product-info">
+                    <h3 class="product-name">@pro.NamePro</h3>
+                    @*<p class="product-description">@pro.DecriptionPro</p>*@
+                    <p class="product-price">@pro.Price.ToString()VNĐ</p>
+                    <div class="product-actions">
+                        @Html.ActionLink("Chon", "Add","Cart", new { id = pro.ProductID }, new { @class = "btn btn-warning" })
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

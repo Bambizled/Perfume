@@ -1,0 +1,161 @@
+﻿@model Perfume.Models.AdminUser
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_LayoutPageMain.cshtml";
+}
+
+<link href="~/Content/MainStyles.css" rel="stylesheet" />
+<link href="~/Content/ResponsiveStyle.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+<style>
+    .form-login {
+        min-height: 100vh;
+        background-color: #0d2178; /**/
+        padding: 8rem 2rem;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+    }
+    .create-login {
+        background-color: beige;
+        padding: 3rem;
+        border-radius: 15px;
+        max-width: 800px;
+        margin: 0 auto;
+        width:100%;
+    }
+    .form-grouplogin{
+        margin-bottom:20px;
+        display:grid;
+        grid-template-columns:1fr 2fr 1fr;
+        gap:1rem;
+        text-align:center;
+    }
+    .lable-left {
+        text-align: left;
+        font-weight: 600;
+        color: #0d2178;
+    }
+
+    .edit-between {
+        text-align: left;
+    }
+
+    .vali-right {
+        text-align: left;
+        color: darkred;
+        font-size: 0.9rem;
+    }
+
+
+    .text-centerlogin {
+        text-align: center;
+        margin-bottom: 2rem;
+        color: #0d2178;
+        font-weight: 700;
+        font-size: 1.8rem;
+        padding-bottom: 1rem;
+    }
+    .form-control {
+        border-radius: 5px;
+        padding: 10px 15px;
+        font-size: 1rem;
+        transition: all 0.3s ease;
+        width: 100%;
+    }
+    .btn {
+        padding: 15px 30px;
+        border: none;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 1.5rem;
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .btn-primary {
+        background: #0d2178;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: #6c757d;
+        color: white;
+    }
+    @@media (max-width: 749px) {
+        .form-login {
+            padding-top:17rem;
+        }
+    }
+</style>
+<div class="form-login">
+    <div class="create-login">
+        <h2 class="text-centerlogin">Đăng Nhập Tài Khoản</h2>
+        @using (Html.BeginForm("Login", "LoginRegister", FormMethod.Post))
+        {
+            @Html.AntiForgeryToken()
+            <div class="form-grouplogin">
+                <div class="lable-left">
+                    @Html.LabelFor(m => m.ID)
+                </div>
+                <div class="edit-between">
+                    @Html.EditorFor(m => m.ID, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="vali-right">
+                    @Html.ValidationMessageFor(m => m.ID)
+                    @if (ViewBag.ErrLoginID != null)
+                    {
+                        <span class="text-danger"> @ViewBag.ErrLoginID</span>
+                    }
+                </div>
+            </div>
+            <div class="form-grouplogin">
+                <div class="lable-left">
+                    @Html.LabelFor(m => m.NameUser)
+                </div>
+                <div class="edit-between">
+                    @Html.EditorFor(m => m.NameUser, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="vali-right">
+                    @Html.ValidationMessageFor(m => m.NameUser)
+                    @if (ViewBag.ErrLoginName != null)
+                    {
+                        <span class="text-danger"> @ViewBag.ErrLoginName</span>
+                    }
+                </div>
+            </div>
+            <div class="form-grouplogin">
+                <div class="lable-left">
+                    @Html.LabelFor(m => m.RoleUser)
+                </div>
+                <div class="edit-between">
+                    @Html.EditorFor(m => m.RoleUser, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="vali-right">
+                    @Html.ValidationMessageFor(m => m.RoleUser)
+                </div>
+            </div>
+            <div class="form-grouplogin">
+                <div class="lable-left">
+                    @Html.LabelFor(m => m.PasswordUser)
+                </div>
+                <div class="edit-between">
+                    @Html.PasswordFor(m => m.PasswordUser, new { @class = "form-control" })
+                </div>
+                <div class="vali-right">
+                    @Html.ValidationMessageFor(m => m.PasswordUser)
+                    @if (ViewBag.ErrLoginPass != null)
+                    {
+                        <span class="text-danger"> @ViewBag.ErrLoginPass</span>
+                    }
+                </div>
+            </div>
+            <div class="text-centerlogin">
+                <input type="submit" value="Đăng Nhập" class="btn btn-primary" />
+                @Html.ActionLink("Đăng Ký", "Register", "LoginRegister", null, new { @class = "btn btn-secondary" })
+            </div>
+        }
+    </div>
+</div>
